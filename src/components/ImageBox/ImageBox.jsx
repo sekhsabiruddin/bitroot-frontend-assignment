@@ -3,19 +3,21 @@ import Modal from "../Modal/Modal";
 const ImageBox = () => {
   const [data, setData] = useState(null);
   const [modalToggle, setModalToggle] = useState(false);
-
+  const [loading, setLaoding] = useState(false);
   const handleImageClicked = () => {
     setModalToggle(!modalToggle);
   };
+
   useEffect(() => {
     const fetchData = async () => {
+      setLaoding(true);
       try {
         const response = await fetch(
           "https://my-json-server.typicode.com/Codeinwp/front-end-internship-api/posts"
         );
         const jsonData = await response.json();
         setData(jsonData); // Set state with fetched data
-        console.log("json data", jsonData);
+        setLaoding(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -23,6 +25,13 @@ const ImageBox = () => {
 
     fetchData(); // Call the fetchData function when component mounts
   }, []);
+  if (loading) {
+    return (
+      <div className="loading-continer">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="container">
