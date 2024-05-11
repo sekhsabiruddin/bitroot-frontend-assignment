@@ -105,6 +105,12 @@ body {
   .container .inner-continer {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+    max-width: 90%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .container .inner-continer {
+    max-width: 90%;
   }
 }
 
